@@ -19,18 +19,25 @@ This project follows a multi-tier architecture consisting of:
 User
 ↓
 React Frontend (EC2)
+
 ↓
 Node.js Backend (EC2)
+
 ↓
 API Gateway
+
 ↓
 Lambda
+
 ↓
 S3 + Rekognition
+
 ↓
 DynamoDB + Polly
+
 ↓
 Response to User
+
 
 ---
 
