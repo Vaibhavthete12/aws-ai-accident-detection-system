@@ -21,15 +21,19 @@ function App() {
 
     } catch (error) {
 
-      alert(error.message);
+      console.log(error);
+
+      alert(
+        error.response?.data?.message ||
+        error.message
+      );
 
     }
 
   };
 
   return (
-
-    <div style={{padding:'30px'}}>
+    <div style={{ padding: '30px' }}>
 
       <h1>AI Accident Detection System</h1>
 
@@ -37,39 +41,43 @@ function App() {
         type="text"
         placeholder="Enter Accident Location"
         value={location}
-        onChange={(e)=>setLocation(e.target.value)}
+        onChange={(e) => setLocation(e.target.value)}
       />
 
-      <br/><br/>
+      <br /><br />
 
       <button onClick={submit}>
         Report Accident
       </button>
 
-      <br/><br/>
+      <br /><br />
 
       {result && (
-
         <div>
 
           <h3>Detection Result</h3>
 
-          <p><b>Location:</b> {result.location}</p>
+          <p>
+            <b>Location:</b> {result.location}
+          </p>
 
-          <p><b>Confidence:</b> {result.confidence}%</p>
+          <p>
+            <b>Confidence:</b> {result.confidence}%
+          </p>
 
-          <p><b>Status:</b> {result.status}</p>
+          <p>
+            <b>Status:</b> {result.status}
+          </p>
 
-          <p><b>Accident ID:</b> {result.accident_id}</p>
+          <p>
+            <b>Accident ID:</b> {result.accident_id}
+          </p>
 
         </div>
-
       )}
 
     </div>
-
   );
-
 }
 
 export default App;
