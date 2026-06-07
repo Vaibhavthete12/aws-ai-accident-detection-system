@@ -11,7 +11,7 @@ function App() {
     try {
 
       const response = await axios.post(
-        'http://52.66.210.88:5000/report-accident',
+        'https://2fi0ilpka4.execute-api.ap-south-1.amazonaws.com/report-accident',
         {
           location
         }
