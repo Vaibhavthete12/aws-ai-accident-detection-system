@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import './App.css';
 
 function App() {
 
@@ -21,8 +22,6 @@ function App() {
 
     } catch (error) {
 
-      console.log(error);
-
       alert(
         error.response?.data?.message ||
         error.message
@@ -33,51 +32,51 @@ function App() {
   };
 
   return (
-    <div style={{ padding: '30px' }}>
 
-      <h1>AI Accident Detection System</h1>
+    <div className="container">
 
-      <input
-        type="text"
-        placeholder="Enter Accident Location"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-      />
+      <div className="card">
 
-      <br /><br />
+        <h1>🚨 AI Accident Detection System</h1>
 
-      <button onClick={submit}>
-        Report Accident
-      </button>
+        <p className="subtitle">
+          AWS Powered Smart Emergency Detection & Alert Platform
+        </p>
 
-      <br /><br />
+        <input
+          type="text"
+          placeholder="Enter Accident Location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
 
-      {result && (
-        <div>
+        <button onClick={submit}>
+          Analyze Accident
+        </button>
 
-          <h3>Detection Result</h3>
+        {result && (
 
-          <p>
-            <b>Location:</b> {result.location}
-          </p>
+          <div className="result">
 
-          <p>
-            <b>Confidence:</b> {result.confidence}%
-          </p>
+            <h2>📊 Detection Result</h2>
 
-          <p>
-            <b>Status:</b> {result.status}
-          </p>
+            <div className="info">
+              <p><strong>📍 Location:</strong> {result.location}</p>
+              <p><strong>🎯 Confidence:</strong> {result.confidence}%</p>
+              <p><strong>🚦 Status:</strong> {result.status}</p>
+              <p><strong>🆔 Accident ID:</strong> {result.accident_id}</p>
+            </div>
 
-          <p>
-            <b>Accident ID:</b> {result.accident_id}
-          </p>
+          </div>
 
-        </div>
-      )}
+        )}
+
+      </div>
 
     </div>
+
   );
+
 }
 
 export default App;
