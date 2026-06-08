@@ -1,46 +1,83 @@
-return (
+import axios from 'axios';
+import { useState } from 'react';
+import './App.css';
 
-<div className="container">
+function App() {
 
-  <div className="card">
+  const [location, setLocation] = useState('');
+  const [result, setResult] = useState(null);
 
-    <h1>🚨 AI Accident Detection System</h1>
+  const submit = async () => {
 
-    <p className="subtitle">
-      AWS Powered Smart Emergency Detection Platform
-    </p>
+    try {
 
-    <input
-      type="text"
-      placeholder="Enter Accident Location"
-      value={location}
-      onChange={(e)=>setLocation(e.target.value)}
-    />
+      const response = await axios.post(
+        'http://52.66.210.88:5000/report-accident',
+        {
+          location
+        }
+      );
 
-    <button onClick={submit}>
-      Analyze Accident
-    </button>
+      setResult(response.data);
 
-    {result && (
+    } catch (error) {
 
-      <div className="result">
+      alert(
+        error.response?.data?.message ||
+        error.message
+      );
 
-        <h2>📊 Detection Result</h2>
+    }
 
-        <p><b>📍 Location:</b> {result.location}</p>
+  };
 
-        <p><b>🎯 Confidence:</b> {result.confidence}%</p>
+  return (
 
-        <p><b>🚦 Status:</b> {result.status}</p>
+    <div className="container">
 
-        <p><b>🆔 Accident ID:</b> {result.accident_id}</p>
+      <div className="card">
+
+        <h1>🚨 AI Accident Detection System</h1>
+
+        <p className="subtitle">
+          AWS Powered Smart Emergency Detection Platform
+        </p>
+
+        <input
+          type="text"
+          placeholder="Enter Accident Location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+
+        <button onClick={submit}>
+          Analyze Accident
+        </button>
+
+        {result && (
+
+          <div className="result">
+
+            <h2>📊 Detection Result</h2>
+
+            <p><b>📍 Location:</b> {result.location}</p>
+
+            <p><b>🎯 Confidence:</b> {result.confidence}%</p>
+
+            <p><b>🚦 Status:</b> {result.status}</p>
+
+            <p><b>🆔 Accident ID:</b> {result.accident_id}</p>
+
+          </div>
+
+        )}
 
       </div>
 
-    )}
+    </div>
 
-  </div>
+  );
 
-</div>
+}
 
-);
+export default App;
