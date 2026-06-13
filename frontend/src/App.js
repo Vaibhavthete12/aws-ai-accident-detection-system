@@ -3,16 +3,14 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-
   const [location, setLocation] = useState('');
   const [result, setResult] = useState(null);
 
   const submit = async () => {
-
     try {
-
+      // CHANGED EC2 IP → localhost
       const response = await axios.post(
-        'http://52.66.210.88:5000/report-accident',
+        'http://localhost:5000/report-accident',
         {
           location
         }
@@ -21,20 +19,15 @@ function App() {
       setResult(response.data);
 
     } catch (error) {
-
       alert(
         error.response?.data?.message ||
         error.message
       );
-
     }
-
   };
 
   return (
-
     <div className="container">
-
       <div className="card">
 
         <h1>🚨 AI Accident Detection System</h1>
@@ -55,29 +48,19 @@ function App() {
         </button>
 
         {result && (
-
           <div className="result">
-
             <h2>📊 Detection Result</h2>
 
             <p><b>📍 Location:</b> {result.location}</p>
-
             <p><b>🎯 Confidence:</b> {result.confidence}%</p>
-
             <p><b>🚦 Status:</b> {result.status}</p>
-
             <p><b>🆔 Accident ID:</b> {result.accident_id}</p>
-
           </div>
-
         )}
 
       </div>
-
     </div>
-
   );
-
 }
 
 export default App;
