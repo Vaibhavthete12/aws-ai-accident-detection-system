@@ -1,7 +1,7 @@
 import json
 import boto3
 import uuid
-
+print("Version 2 pipeline deployed")
 # AWS Clients
 s3 = boto3.client('s3')
 rekognition = boto3.client('rekognition')
